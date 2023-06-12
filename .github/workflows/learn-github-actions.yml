@@ -47,4 +47,4 @@ jobs:
         with:
           key: ${{ secrets.SSH }}
           known_hosts: unnecessary
-      - run: ssh ${{ variables.USERNAME }}@${{ variables.IP }} -e "killall node; cd with-cypress-app; git pull; npm i && npm run build && npm run start"
+      - run: ssh -i ~/.ssh/id_rsa ${{ variables.USERNAME }}@${{ variables.IP }} -e "killall node; cd with-cypress-app; git pull; npm i && npm run build && npm run start"
