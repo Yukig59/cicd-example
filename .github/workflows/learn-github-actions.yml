@@ -5,16 +5,15 @@ jobs:
   install-deps-and-cache:
       runs-on: ubuntu-latest
       steps:
-        - name: Install deps
-          uses: action/checkout@v3
-          uses: action/setup-node@v3
+        - uses: action/checkout@v3
+        - uses: action/setup-node@v3
           with:
               node-version: '18'
-          run: |
+        - run: |
             npm install
             npm run build
-          - name: Cache modules
-            uses: actions/cache@v3
+        - name: Cache modules
+          uses: actions/cache@v3
             with:
                 path: node_modules
                 key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
