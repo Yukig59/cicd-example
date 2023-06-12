@@ -38,3 +38,13 @@ jobs:
         with:
           name: video
           path: cypress/videos/app.cy.ts.mp4
+  deploy:
+    runs-on: ubuntu-latest
+    needs: tests
+    steps:
+       - uses: D3rHase/ssh-command-action
+         with:
+            host: ${{secrets.IP}} # Remote server address / ip - required
+            user: ${{secrets.USERNAME}} # Remote server user - required
+            private_key: ${{secrets.SSH}} # Private ssh key registered on the remote server - required
+            command: cd with-cypress-app;git pull;killall node;npm run build && npm run start # Command to be executed - Default: echo 'hello world' - optional
