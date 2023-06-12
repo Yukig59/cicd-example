@@ -42,8 +42,8 @@ jobs:
     runs-on: ubuntu-latest
     needs: tests
     steps:
-       - uses: D3rHase/ssh-command-action
-         with:
+        - uses: D3rHase/ssh-command-action@v0.2.2
+          with:
             host: ${{secrets.IP}} # Remote server address / ip - required
             user: ${{secrets.USERNAME}} # Remote server user - required
             private_key: ${{secrets.SSH}} # Private ssh key registered on the remote server - required
