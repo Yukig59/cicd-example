@@ -42,9 +42,9 @@ jobs:
     runs-on: ubuntu-latest
     needs: tests
     steps:
-       - name: Install SSH key
-         uses: shimataro/ssh-key-action@v2
-         with:
-            key: ${{ secrets.SSH }}
-            known_hosts: unnecessary
-        - run: ssh ${{ variables.USERNAME }}@${{ variables.IP}} -e "killall node; cd with-cypress-app; git pull; npm i && npm run build && npm run start"
+      - name: Install SSH key
+        uses: shimataro/ssh-key-action@v2
+        with:
+          key: ${{ secrets.SSH }}
+          known_hosts: unnecessary
+      - run: ssh ${{ variables.USERNAME }}@${{ variables.IP}} -e "killall node; cd with-cypress-app; git pull; npm i && npm run build && npm run start"
