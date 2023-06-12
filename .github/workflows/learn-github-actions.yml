@@ -12,7 +12,6 @@ jobs:
             node-version: '18'
       - run: npm install
       - run: npm run build
-      - name: Test with cypress
       - run: npm run e2e:headless
       - uses: actions/upload-artifact@v3
         if: ${{ failure() || success() }}
