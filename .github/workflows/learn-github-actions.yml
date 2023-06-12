@@ -14,7 +14,7 @@ jobs:
       - run: npm run build
       - run: npm run e2e:headless
       - uses: actions/upload-artifact@v3
-        if: ${{ failure() || success() }}
+        if: ${{ always() }}
         with:
           name: video
           path: cypress/videos/app.cy.ts.mp4
