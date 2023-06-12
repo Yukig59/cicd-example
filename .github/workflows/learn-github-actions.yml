@@ -11,4 +11,4 @@ jobs:
         uses: webfactory/ssh-agent@v0.7.0
         with:
             ssh-private-key: ${{ secrets.SSH }}
-      - run: ssh -o StrictHostKeyChecking=no ${{ secrets.USERNAME }}@${{ secrets.IP }} "pm2 stop npm && cd with-cypress-app && git pull && npm i && npm run build && pm2 start npm -- run start"
+      - run: ssh -o StrictHostKeyChecking=no ${{ secrets.USERNAME }}@${{ secrets.IP }} "ls"
