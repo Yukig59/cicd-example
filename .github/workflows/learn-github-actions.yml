@@ -60,4 +60,4 @@ jobs:
             ssh-private-key: ${{ secrets.SSH }}
         - run: ssh -o StrictHostKeyChecking=no ${{ secrets.USERNAME }}@${{ secrets.IP }} "\
             docker pull ghcr.io/${{ github.actor }}/next-docker:1.0.1 && \
-            docker start next-docker"
+            docker start next-docker" 
