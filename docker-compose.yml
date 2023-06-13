@@ -1,4 +1,3 @@
-version: '3'
 services:
   webapp:
     image: "ghcr.io/yukig59/next-docker:1.0.1"
