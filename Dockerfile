@@ -1,5 +1,5 @@
 FROM --platform=linux/amd64 node:18
-LABEL org.opencontainers.image.source https://github.com/yukig59/cicd-example
+LABEL org.opencontainers.image.source = "https://github.com/Yukig59/cicd-example"
 ADD . /app/
 WORKDIR /app
 RUN npm i
