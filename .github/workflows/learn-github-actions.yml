@@ -59,8 +59,5 @@ jobs:
           with:
             ssh-private-key: ${{ secrets.SSH }}
         - run: |
-            ssh -o StrictHostKeyChecking=no ${{ secrets.USERNAME }}@${{ secrets.IP }} "\
-            sudo docker pull ghcr.io/yukig59/next-docker:1.0.1 && \
-            sudo docker stop next-docker && \
-            sudo docker rm next-docker && \
-            sudo docker run -d -p 3000:3000 --name next-docker ghcr.io/yukig59/next-docker:1.0.1"
+            scp docker-compose.yml ${{ secrets.USERNAME }}@${{ secrets.IP }}:~/docker-compose.yml
+            ssh ${{ secrets.USERNAME }}@${{ secrets.IP }} "docker-compose up -d"
