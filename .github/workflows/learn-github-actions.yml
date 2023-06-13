@@ -2,13 +2,66 @@ name: Test de workflow
 run-name: ${{ github.actor }} is testing GitHub Actions
 on: [push]
 jobs:
-
-  deploy:
-    runs-on: ubuntu-latest
-    #needs: tests
-    steps:
+#    install-deps-and-cache:
+#        runs-on: ubuntu-latest
+#        steps:
+#          - uses: actions/checkout@v3
+#          - uses: actions/setup-node@v3
+#            with:
+#                node-version: '18'
+#          - name: Cache modules
+#            uses: actions/cache@v3
+#            with:
+#                path: |
+#                  node_modules
+#                  /home/runner/.cache/Cypress
+#                key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+#          - run: |
+#                npm install
+#                npm run build
+#    tests:
+#        runs-on: ubuntu-latest
+#        needs: install-deps-and-cache
+#        steps:
+#            - uses: actions/checkout@v3
+#            - uses: actions/cache@v3
+#              with:
+#                path: |
+#                    node_modules
+#                    /home/runner/.cache/Cypress
+#                key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+#    deploy:
+#      runs-on: ubuntu-latest
+#      #needs: tests
+#      steps:
+#        - name: Install SSH key
+#          uses: webfactory/ssh-agent@v0.7.0
+#          with:
+#              ssh-private-key: ${{ secrets.SSH }}
+#        - run: ssh -o StrictHostKeyChecking=no ${{ secrets.USERNAME }}@${{ secrets.IP }} "\
+#            cd with-cypress-app && \
+#            git pull && \
+#            npm i && \
+#            npm run build && \
+#            pm2 start npm -- run start"
+    build-docker:
+      - uses: actions/checkout@v3
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Build and push
+        uses: docker/build-push-action@v4
+        with:
+          push: true
+          tags: ghcr.io/${{ github.actor }}/next-docker:1.0.1
+    pull-ec2:
       - name: Install SSH key
         uses: webfactory/ssh-agent@v0.7.0
         with:
-            ssh-private-key: ${{ secrets.SSH }}
-      - run: ssh -o StrictHostKeyChecking=no ${{ secrets.USERNAME }}@${{ secrets.IP }} "pm2 stop npm && cd with-cypress-app && git pull && npm i && npm run build && pm2 start npm -- run start"
+          ssh-private-key: ${{ secrets.SSH }}
+      - run: ssh -o StrictHostKeyChecking=no ${{ secrets.USERNAME }}@${{ secrets.IP }} "\
+          docker pull ghcr.io/${{ github.actor }}/next-docker:1.0.1 && \
+          docker start next-docker"
