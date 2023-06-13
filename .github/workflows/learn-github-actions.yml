@@ -58,8 +58,9 @@ jobs:
           uses: webfactory/ssh-agent@v0.7.0
           with:
             ssh-private-key: ${{ secrets.SSH }}
-        - run: ssh -o StrictHostKeyChecking=no ${{ secrets.USERNAME }}@${{ secrets.IP }} "\
-            docker pull ghcr.io/yukig59/next-docker:1.0.1 && \
-            docker stop next && \
-            docker rm next && \
-            docker run -d -p 3000:3000 --name next ghcr.io/yukig59/next-docker:1.0.1"
+        - run: |
+            ssh -o StrictHostKeyChecking=no ${{ secrets.USERNAME }}@${{ secrets.IP }} "\
+            sudo docker pull ghcr.io/yukig59/next-docker:1.0.1 && \
+            sudo docker stop next && \
+            sudo docker rm next && \
+            sudo docker run -d -p 3000:3000 --name next ghcr.io/yukig59/next-docker:1.0.1"
