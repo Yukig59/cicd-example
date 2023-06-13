@@ -60,6 +60,5 @@ jobs:
           with:
             ssh-private-key: ${{ secrets.SSH }}
         - run: |
-            ls
             scp -o StrictHostKeyChecking=no docker-compose.prod.yml ${{ secrets.USERNAME }}@${{ secrets.IP }}:/home/${{ secrets.USERNAME }}
             ssh -o StrictHostKeyChecking=no ${{ secrets.USERNAME }}@${{ secrets.IP }} "sudo docker compose -f docker-compose.prod.yml up -d --pull always"
