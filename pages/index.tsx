@@ -7,6 +7,8 @@ export default function Home() {
   return (
    <>
    <h1>SI TU LIS CA C'EST QUE CA MARCHE</h1>
+   <h1>SI TU LIS CA C'EST QUE L'UPDATE MARCHE</h1>
+   <h1>SI TU LIS CA C'EST QUE WWATCHTOWER</h1>
    </>
   )
 }

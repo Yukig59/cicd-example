@@ -1,6 +1,10 @@
 services:
   webapp:
-    image: "ghcr.io/yukig59/next-docker:1.0.1"
+    image: "ghcr.io/yukig59/next-docker:latest"
+    restart: always
     ports:
       - "3000:3000"
-    restart: always
+  watchtower:
+    image: containrrr/watchtower
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
