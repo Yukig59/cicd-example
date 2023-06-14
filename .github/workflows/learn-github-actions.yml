@@ -23,7 +23,7 @@ jobs:
     if: github.ref == 'refs/heads/develop'
     environment:
       name: developpement
-      url: http://57.128.77.84/
+      url: http://34.201.241.107
     runs-on: ubuntu-22.04 #Mettre ubuntu-latest revient au même
     permissions:
       contents: read
@@ -40,7 +40,6 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           context: .
-          file: ./docker/next/Dockerfile
           push: true
           tags: ghcr.io/yukig59/next-docker:dev
 
@@ -49,7 +48,7 @@ jobs:
     if: github.ref == 'refs/heads/main'
     environment:
       name: production
-      url: http://57.128.77.84/
+      url: http://34.201.241.107/
     runs-on: ubuntu-22.04 #Mettre ubuntu-latest revient au même
     permissions:
       contents: read
@@ -66,6 +65,5 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           context: .
-          file: ./docker/next/Dockerfile
           push: true
           tags: ghcr.io/yukig59/next-docker:latest
