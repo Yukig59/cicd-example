@@ -23,7 +23,7 @@ jobs:
     if: github.ref == 'refs/heads/develop'
     environment:
       name: developpement
-      url: http://34.201.241.107
+      url: http://34.201.241.107:3000
     runs-on: ubuntu-22.04 #Mettre ubuntu-latest revient au même
     permissions:
       contents: read
@@ -48,7 +48,7 @@ jobs:
     if: github.ref == 'refs/heads/main'
     environment:
       name: production
-      url: http://34.201.241.107/
+      url: http://34.201.241.107:3000/
     runs-on: ubuntu-22.04 #Mettre ubuntu-latest revient au même
     permissions:
       contents: read
